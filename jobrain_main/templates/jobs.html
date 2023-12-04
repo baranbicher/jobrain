@@ -29,7 +29,7 @@
                     <div class="job_filter white-bg">
                         <div class="form_inner white-bg">
                             <h3>Filter</h3>
-                            <form action="#">
+                            <form action="{% url 'jobs' %}" method="GET">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="single_field">
@@ -38,71 +38,86 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Location">Location</option>
-                                                <option value="1">Rangpur</option>
-                                                <option value="2">Dhaka </option>
+                                            <select class="wide" name="location">
+                                                <option value="">Location</option>
+                                                {% for location in locations %}
+                                                <option value="{{ location.id }}">{{ location.name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Category">Category</option>
-                                                <option value="1">Category 1</option>
-                                                <option value="2">Category 2 </option>
+                                            <select class="wide" name="category">
+                                                <option value="">Category</option>
+                                                {% for category in categories %}
+                                                <option value="{{ category.id }}">{{ category.name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Experience">Experience</option>
-                                                <option value="1">Experience 1</option>
-                                                <option value="2">Experience 2 </option>
+                                            <select class="wide" name="experience">
+                                                <option value="">Experience</option>
+                                                {% for experience in experiences %}
+                                                <option value="{{ experience.id }}">{{ experience.name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Job type">Job type</option>
-                                                <option value="1">full time 1</option>
-                                                <option value="2">part time 2 </option>
+                                            <select class="wide" name="job type">
+                                                <option value="">Job type</option>
+                                                {% for jobtype in jobtypes %}
+                                                <option value="{{ jobtype.id }}">{{ jobtype.name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Qualification">Qualification</option>
-                                                <option value="1">Qualification 1</option>
-                                                <option value="2">Qualification 2</option>
+                                            <select class="wide" name="qualification" >
+                                                <option value="">Qualification</option>
+                                                {% for qualification in qualifications %}
+                                                <option value="{{ qualification.id }}">{{ qualification.name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Gender">Gender</option>
-                                                <option value="1">male</option>
-                                                <option value="2">female</option>
+                                            <select class="wide" name="gender">
+                                                <option value="">Gender</option>
+                                                {% for gender in genders %}
+                                                <option value="{{ gender.id }}">{{ gender.name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="reset_btn p-2">
+                                    <button  class="boxed-btn3 w-100 " type="submit">Filter</button>
+                                </div>
+
+                                
                             </form>
                         </div>
-                        <div class="range_wrap">
+
+                        {%comment%} price range code here.....
+                        {% comment %} <div class="range_wrap">
                             <label for="amount">Price range:</label>
                             <div id="slider-range"></div>
                             <p>
                                 <input type="text" id="amount" readonly style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
                             </p>
+                        </div> {% endcomment %}
+
+                        <div class="reset_btn p-2">
+                            <a href="{% url 'jobs' %}"><button  class="boxed-btn3 w-100" type="reset">Reset</button></a>
                         </div>
-                        <div class="reset_btn">
-                            <button  class="boxed-btn3 w-100" type="submit">Reset</button>
-                        </div>
+
                     </div>
                 </div>
                 <div class="col-lg-9">

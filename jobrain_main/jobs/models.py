@@ -4,18 +4,21 @@ from django.db import models
 
 class Gender(models.Model):
     name = models.CharField(max_length=50, unique=True,)
+    slug = models.SlugField(max_length=50, unique=True, null=True)
     
     def __str__(self):
         return self.name
 
 class Qualification(models.Model):
     name = models.CharField(max_length=50, unique=True,)
+    slug = models.SlugField(max_length=50, unique=True, null=True)
     
     def __str__(self):
         return self.name
 
 class Experience(models.Model):
     name = models.CharField(max_length=50, unique=True,)
+    slug = models.SlugField(max_length=50, unique=True, null=True)
     
     def __str__(self):
         return self.name
@@ -44,6 +47,7 @@ class Location(models.Model):
     
 class JobType(models.Model):
     name = models.CharField(max_length=50, unique=True,)
+    slug = models.SlugField(max_length=50, unique=True, null=True)
     
     def __str__(self):
         return self.name
