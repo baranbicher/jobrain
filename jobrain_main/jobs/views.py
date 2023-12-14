@@ -22,12 +22,19 @@ def job_list(request):
     qualifications = Qualification.objects.all()
     genders = Gender.objects.all()
 
+    # Arama sorgusu
+    search_query = request.GET.get('search', '')
+    if search_query:
+        jobs = jobs.filter(
+            Q(name__icontains=search_query) |
+            Q(description__icontains=search_query) |
+            Q(category__name__icontains=search_query)
+        )
+
     #filter start
     my_filter = JobFilter(request.GET, queryset=jobs)
     jobs = my_filter.qs
     #filter done
-
-
 
     context = {
         'jobs': jobs,
@@ -38,6 +45,7 @@ def job_list(request):
         'qualifications': qualifications,
         'genders': genders,
         'my_filter': my_filter,
+        'search_query': search_query,
     }
 
     return render(request, 'jobs.html', context)
@@ -71,28 +79,6 @@ def location_list(request, location_slug):
         'locations': locations
     }
 
-    return render(request, 'jobs.html', context)
-
-def search(request):
-
-    search_query = ''
-    if request.GET.get('search'):
-        search_query = request.GET.get('search')
-
-        """aynı şeyleri göstermez... distinct"""
-
-    jobs = Job.objects.distinct().filter(
-        Q(name__icontains = search_query) | Q(description__icontains = search_query) | Q(category__name__icontains = search_query)
-        )
-        
-    categories = Category.objects.all()
-
-    context = {
-        'jobs': jobs,
-        'categories': categories,
-        'search_query': search_query,
-
-    }
     return render(request, 'jobs.html', context)
 
 
