@@ -35,6 +35,12 @@ def job_list(request):
     my_filter = JobFilter(request.GET, queryset=jobs)
     jobs = my_filter.qs
     #filter done
+    paginator = Paginator(jobs, 3)
+    page_number = request.GET.get('page', 1)
+    try:
+        jobs = paginator.page(page_number)
+    except EmptyPage:
+        jobs = paginator.page(paginator.num_pages)
 
     context = {
         'jobs': jobs,
@@ -82,14 +88,3 @@ def location_list(request, location_slug):
     return render(request, 'jobs.html', context)
 
 
-def pagination(request):
-    jobs = Job.objects.all()
-    
-    paginator = Paginator(jobs, 3)
-    page_number = request.GET.get('page', 1)
-    try:
-        jobs = paginator.page(page_number)
-    except EmptyPage:
-        jobs = paginator.page(paginator.num_pages)
-
-    return render(request, 'jobs.html', {'jobs': jobs})
