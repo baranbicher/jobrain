@@ -152,16 +152,16 @@
                                             <img class="mw-100 mh-100" src="{{job.image.url}}" alt="">
                                         </div>
                                         <div class="jobs_conetent">
-                                            <a href="{% url 'job_details' job.category.slug job.slug %}"><h4>{{job.name}}</h4></a>
+                                            <a href="{% url 'job_details' job.category.slug job.slug %}"><h4>{{ job.name|safe }}</h4></a>
                                             <div class="links_locat d-flex align-items-center">
                                                 <div class="location">
-                                                    <p> <i class="fa fa-map-marker"></i>{{job.location}}</p>
+                                                    <p> <i class="fa fa-map-marker"></i>{{ job.location|safe }}</p>
                                                 </div>
                                                 <div class="location">
-                                                    <p> <i class="fa fa-clock-o"></i>{{job.jobtype}}</p>
+                                                    <p> <i class="fa fa-clock-o"></i>{{ job.jobtype|safe }}</p>
                                                 </div>
                                                 <div class="location">
-                                                    <p> <i class="fa fa-folder"></i>{{job.category}}</p>
+                                                    <p> <i class="fa fa-folder"></i>{{ job.category|safe }}</p>
                                                 </div>
                                             </div>
                                         </div>
